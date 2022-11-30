@@ -7,19 +7,21 @@ const play = document.querySelector('.play-icon');
 const spanClose = document.querySelector('.close');
 const popup = document.getElementById('myModal');
 
-burger?.addEventListener('click', () => {
-  iconBurger?.classList.toggle('show');
-  iconX?.classList.toggle('show');
-  column?.classList.toggle('show');
+burger.addEventListener('click', () => {
+  iconBurger.classList.toggle('show');
+  iconX.classList.toggle('show');
+  column.classList.toggle('show');
 });
 
-play?.addEventListener('click', () => {
+play.addEventListener('click', () => {
   popup.style.display = 'block';
 });
 
-spanClose.onclick = function () {
-  popup.style.display = 'none';
-};
+if (spanClose && popup) {
+  spanClose.addEventListener('click', () => {
+    popup.style.display = 'none';
+  });
+}
 
 window.onclick = function (event) {
   if (event.target == popup) {

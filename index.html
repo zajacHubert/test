@@ -13,104 +13,114 @@
   </head>
 
   <body>
-    <div id="myModal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <iframe
-          class="video"
-          src="https://www.youtube.com/embed/tmygvlPRShY"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+    <div class="wrapper">
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <iframe
+            class="video"
+            src="https://www.youtube.com/embed/tmygvlPRShY"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
       </div>
-    </div>
-    <header>
-      <div class="burger">
-        <i class="fa-solid fa-bars show"></i>
-        <i class="fa-solid fa-xmark"></i>
-      </div>
-      <aside>
-        <nav>
-          <ul>
-            <li><a href="#">Find Hotels</a></li>
-            <li><a href="#">Location</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Login</a></li>
-          </ul>
-        </nav>
-      </aside>
-      <div class="desktop-navbar">
-        <h3>Gloritel</h3>
-        <div class="desktop-menu">
+      <header>
+        <div class="burger">
+          <i class="fa-solid fa-bars show"></i>
+          <i class="fa-solid fa-xmark"></i>
+        </div>
+        <aside>
           <nav>
             <ul>
               <li><a href="#">Find Hotels</a></li>
               <li><a href="#">Location</a></li>
               <li><a href="#">About</a></li>
               <li><a href="#">Contact</a></li>
+              <li><a href="#">Login</a></li>
             </ul>
           </nav>
-          <button class="login">Login</button>
-        </div>
-      </div>
-      <div class="desktop-container">
-        <div class="content">
-          <h1>Find Most Luxurious Hotels Across The Globe</h1>
-          <div class="play">
-            <p class="watch">Watch Demo Video</p>
-            <div class="play-icon">
-              <i class="fa-sharp fa-solid fa-play show"></i>
-            </div>
+        </aside>
+        <div class="desktop-navbar">
+          <h3>Gloritel</h3>
+          <div class="desktop-menu">
+            <nav>
+              <ul>
+                <li>
+                  <a href="#">Find Hotels</a>
+                </li>
+                <li><a href="#">Location</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+            </nav>
+            <button class="login">Login</button>
           </div>
         </div>
-        <div class="form">
-          <form class="info">
-            <label for="destination">Where you go?</label>
-            <input
-              class="input destination"
-              type="text"
-              name="destination"
-              placeholder="try Pakistan"
-            />
-            <p class="error destination"></p>
-            <div class="container-date">
-              <div class="item">
-                <label for="in">Check in</label>
-                <input class="input date in" type="date" name="dateIn" />
-              </div>
-              <div class="item">
-                <label for="out">Check out</label>
-                <input class="input date out" type="date" name="dateOut" />
+        <div class="desktop-container">
+          <div class="content">
+            <h1>Find Most Luxurious Hotels Across The Globe</h1>
+            <div class="play">
+              <p class="watch">Watch Demo Video</p>
+              <div class="play-icon">
+                <i class="fa-sharp fa-solid fa-play show"></i>
               </div>
             </div>
-            <p class="error dateIn dateOut"></p>
-            <label for="guest">Guests</label>
-            <select class="input guest" name="guest">
-              <option value="">How many guests?</option>
-              <option value="1">0</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">More</option>
-            </select>
-            <p class="error guest"></p>
-            <div class="container-pay">
+          </div>
+          <div class="form">
+            <form class="info">
+              <label for="destination">Where you go?</label>
+              <i class="fa-sharp fa-solid fa-location-dot show icon"></i>
               <input
-                class="input pay"
-                type="checkbox"
-                name="pay"
+                class="input destination"
+                type="text"
+                name="destination"
                 placeholder="try Pakistan"
               />
-              <label for="pay">Pay when checking in?</label>
-            </div>
-            <button type="submit" class="btn">Search Hotels</button>
-          </form>
+              <p class="error destination"></p>
+              <div class="container-date">
+                <div class="item">
+                  <label for="in">Check in</label>
+                  <input class="input date in" type="date" name="dateIn" />
+                </div>
+                <div class="item">
+                  <label for="out">Check out</label>
+                  <input
+                    class="input date out"
+                    type="date"
+                    name="dateOut"
+                    pattern="\d{2}-\d{2}"
+                  />
+                </div>
+              </div>
+              <p class="error date"></p>
+              <label for="guest">Guests</label>
+              <select class="input guest" name="guest">
+                <option value="">How many guests?</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+              <p class="error guest"></p>
+              <div class="container-pay">
+                <input
+                  class="input pay"
+                  type="checkbox"
+                  name="pay"
+                  placeholder="try Pakistan"
+                  checked="checked"
+                />
+                <label for="pay">Pay when checking in?</label>
+              </div>
+              <button type="submit" class="btn">Search Hotels</button>
+            </form>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </div>
     <script src="./script.js"></script>
     <script src="./validate.js"></script>
   </body>

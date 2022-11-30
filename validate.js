@@ -1,7 +1,6 @@
 const inputs = document.querySelectorAll('.input');
 const form = document.querySelector('.info');
 const paragraphs = document.querySelectorAll('.error');
-
 class Validate {
   info = {
     destination: '',
@@ -15,19 +14,77 @@ class Validate {
     this.info[`${name}`] = value;
   }
 
-  isRequired(value) {
+  checkRequired(value) {
     if (!value.length) {
       return 'This field is required';
     }
     return 'success';
   }
 
-  isCorrectDate(dateIn, dateOut) {
-    const today = new Date().getTime();
-    if (dateIn < today || dateIn > dateOut) {
-      return 'Incorrect Date';
+  checkDestination(value) {
+    const res = this.checkRequired(value);
+    if (res !== 'success') {
+      return {
+        correct: false,
+        selector: 'destination',
+        message: res,
+      };
     } else {
-      return 'success';
+      if (value.length < 3 || value.length > 30) {
+        return {
+          correct: false,
+          selector: 'destination',
+          message:
+            'The length of the expression must be between 3 and 30 characters',
+        };
+      } else {
+        return { correct: true };
+      }
+    }
+  }
+
+  checkDate(dateIn, dateOut) {
+    const res = this.checkRequired(dateIn);
+    const res2 = this.checkRequired(dateOut);
+    if (res !== 'success' || res2 !== 'success') {
+      return {
+        correct: false,
+        selector: 'date',
+        message: res,
+      };
+    } else {
+      const today = new Date().getTime();
+      const dateInTime = new Date(dateIn).getTime();
+      const dateOutTime = new Date(dateOut).getTime();
+      if (dateInTime < today || dateInTime > dateOutTime) {
+        return {
+          correct: false,
+          selector: 'date',
+          message: 'Incorrect date',
+        };
+      } else {
+        return { correct: true };
+      }
+    }
+  }
+
+  checkGuest(value) {
+    const res = this.checkRequired(value);
+    if (res !== 'success') {
+      return {
+        correct: false,
+        selector: 'guest',
+        message: res,
+      };
+    } else {
+      return { correct: true };
+    }
+  }
+
+  displayError(selector, message) {
+    const p = document.querySelector(`.error.${selector}`);
+    if (p) {
+      p.textContent = message;
     }
   }
 }
@@ -40,30 +97,31 @@ inputs.forEach((input) => {
   });
 });
 
-form?.addEventListener('submit', (e) => {
+form.addEventListener('submit', (e) => {
   e.preventDefault();
-  for (let [key, value] of Object.entries(validate.info)) {
-    const res = validate.isRequired(value);
-    if (res !== 'success') {
-      const p = document.querySelector(`.error.${key}`);
-      if (p) {
-        p.textContent = res;
+  const { destination, dateIn, dateOut, guest } = validate.info;
+
+  const resDestination = validate.checkDestination(destination);
+  if (!resDestination.correct) {
+    validate.displayError(resDestination.selector, resDestination.message);
+  }
+
+  const resDate = validate.checkDate(dateIn, dateOut);
+  if (!resDate.correct) {
+    validate.displayError(resDate.selector, resDate.message);
+  }
+
+  const resGuest = validate.checkGuest(guest);
+  if (!resGuest.correct) {
+    validate.displayError(resGuest.selector, resGuest.message);
+  }
+
+  if (resDestination.correct && resDate.correct && resGuest.correct) {
+    paragraphs.forEach((p) => {
+      if (p.textContent) {
+        p.textContent = '';
       }
-    } else {
-      if (key === 'dateIn' || key === 'dateOut') {
-        const dateIn = new Date(validate.info.dateIn).getTime();
-        const dateOut = new Date(validate.info.dateOut).getTime();
-        const res = validate.isCorrectDate(dateIn, dateOut);
-        if (res !== 'success') {
-          const p = document.querySelector(`.error.${key}`);
-          p.textContent = res;
-        } else {
-          paragraphs.forEach((p) => {
-            p.textContent = '';
-          });
-          console.log('Przesłanie formularza');
-        }
-      }
-    }
+    });
+    console.log('Przesłanie formularza');
   }
 });
